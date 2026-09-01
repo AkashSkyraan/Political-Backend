@@ -509,6 +509,55 @@ router.post(
     }
 */ meetingcontroller.updateMeeting,
 );
+router.post(
+  "/getmeetappoint",
+  /*
+    #swagger.tags = ['4.Meeting']
+    #swagger.summary = 'Get Meetings and Appointments by user id and filters'
+    #swagger.description = 'Get meetings and appointments user id and filters'
+
+    #swagger.requestBody = {
+      required: true,
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              user_id: {
+                type: "string",
+                example: "USER_efKL6767"
+              },
+              status: {
+                type: "string",
+                example: "pending,cancelled,completed"
+              },
+              from_date: {
+                type: "string",
+                example: "2026-06-12"
+              },
+              to_date: {
+                type: "string",
+                example: "2026-06-16"
+              },
+              page: {
+                type: "integer",
+                example: 2
+              }
+            }
+          }
+        }
+      }
+    }
+
+    #swagger.responses[200] = {
+      description: 'Meeting updated successfully'
+    }
+
+    #swagger.responses[500] = {
+      description: 'Internal Server Error'
+    }
+*/ meetingcontroller.getMeetingsAppoints,
+);
 
 router.post(
   "/addappointment",

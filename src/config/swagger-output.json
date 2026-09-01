@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://political.skyraancloud.com/server/api"
+      "url": "http://localhost:5000/api"
     }
   ],
   "paths": {
@@ -1246,6 +1246,64 @@
                   "snooze_at": {
                     "type": "string",
                     "example": "180"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/meeting/getmeetappoint": {
+      "post": {
+        "tags": [
+          "4.Meeting"
+        ],
+        "summary": "Get Meetings and Appointments by user id and filters",
+        "description": "Get meetings and appointments user id and filters",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Meeting updated successfully"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_id": {
+                    "type": "string",
+                    "example": "USER_efKL6767"
+                  },
+                  "status": {
+                    "type": "string",
+                    "example": "pending,cancelled,completed"
+                  },
+                  "from_date": {
+                    "type": "string",
+                    "example": "2026-06-12"
+                  },
+                  "to_date": {
+                    "type": "string",
+                    "example": "2026-06-16"
+                  },
+                  "page": {
+                    "type": "integer",
+                    "example": 2
                   }
                 }
               }

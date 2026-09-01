@@ -2326,3 +2326,62 @@ export const updateAppointment = async (req, res) => {
     );
   }
 };
+
+export const getMeetingsAppoints = async (req, res) => {
+  try {
+    const validatedData = validateRequest(req.body, getAppointSchema);
+
+    if (validatedData?.success === 0) {
+      return sendResponse(
+        res,
+        validatedData?.errorObject?.status,
+        0,
+        "validation Error",
+        [],
+        validatedData?.errorObject?.errors,
+      );
+    }
+
+    let { user_id, status, from_date, to_date, page } = validatedData?.value;
+    // console.log(user_id, status, from_date, to_date, page);
+
+    const result = await meetingMdl.getMeetAppoint({
+      user_id,
+      status,
+      from_date: from_date === "" ? null : from_date,
+      to_date: to_date === "" ? null : to_date,
+      page,
+    });
+    // console.log(result);
+    const finalResponse = replaceNullWithEmptyString(result?.data);
+
+    if (result?.success === 1) {
+      return sendResponse(
+        res,
+        200,
+        1,
+        "Meetings and Appointments fetched successfully",
+        [finalResponse],
+        "",
+      );
+    } else if (result?.success === 0) {
+      return sendResponse(
+        res,
+        200,
+        0,
+        "Failed to fetch Meetings and Appointments",
+        [],
+        "",
+      );
+    }
+  } catch (error) {
+    return sendResponse(
+      res,
+      500,
+      0,
+      "Internal Server Error",
+      [],
+      error.message,
+    );
+  }
+};

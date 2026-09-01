@@ -666,5 +666,145 @@ export class meetingModel {
       };
     }
   }
-  // 
+
+  async getMeetAppoint({
+    user_id,
+    status,
+    from_date,
+    to_date,
+    page,
+    limit = 10,
+  }) {
+    const offset = (page - 1) * limit;
+
+    let meetingQuery = `
+    SELECT
+      id,
+      title,
+      descp,
+      NULL AS a_type,
+      m_type,
+      m_priority,
+      address,
+      status,
+      from_date,
+      to_date,
+      'meetings' AS item_type
+
+    FROM meeting
+
+    WHERE user_id = ?`;
+
+    let appointmentQuery = `
+    SELECT
+      id,
+      title,
+      NULL AS descp,
+      a_type,
+      NULL AS m_type,
+      NULL AS m_priority,
+      address,
+      status,
+      from_date,
+      to_date,
+      'appointments' AS item_type
+
+    FROM appointments
+
+    WHERE user_id = ?`;
+
+    // Separate params for each query
+    let meetingParams = [user_id];
+    let appointmentParams = [user_id];
+
+    // Status filter
+    if (status != null) {
+      const statusArray = status.split(",");
+      const placeholders = statusArray.map(() => "?").join(",");
+
+      meetingQuery += ` AND status IN (${placeholders})`;
+      appointmentQuery += ` AND status IN (${placeholders})`;
+
+      meetingParams.push(...statusArray);
+      appointmentParams.push(...statusArray);
+    }
+
+    // Date filter
+    if (from_date != null) {
+      meetingQuery += ` AND from_date <= ?`;
+      appointmentQuery += ` AND from_date <= ?`;
+
+      meetingParams.push(`${to_date} 23:59:59`);
+      appointmentParams.push(`${to_date} 23:59:59`);
+    }
+
+    if (to_date != null) {
+      meetingQuery += ` AND to_date >= ?`;
+      appointmentQuery += ` AND to_date >= ?`;
+
+      meetingParams.push(`${from_date} 00:00:00`);
+      appointmentParams.push(`${from_date} 00:00:00`);
+    }
+
+    // Combine params in the same order as UNION queries
+    let params = [...meetingParams, ...appointmentParams];
+
+    // Count query
+    let countQuery = `
+    SELECT COUNT(*) AS total
+    FROM (
+      ${meetingQuery}
+
+      UNION ALL
+
+      ${appointmentQuery}
+    ) AS combined`;
+
+    const countParams = [...params];
+
+    const countResult = await executeQuery(countQuery, countParams);
+
+    if (countResult?.success === 0) {
+      return {
+        success: 0,
+        error: "Failed to fetch meetings and appointments",
+      };
+    }
+
+    const total = countResult?.data[0]?.total || 0;
+
+    // Combined query
+    let query = `
+    ${meetingQuery}
+
+    UNION ALL
+
+    ${appointmentQuery}
+
+    ORDER BY from_date DESC
+    LIMIT ? OFFSET ?`;
+
+    params.push(Number(limit), Number(offset));
+
+    const result = await executeQuery(query, params);
+
+    if (result?.success === 1) {
+      return {
+        success: 1,
+        data: result.data,
+        pagination: {
+          total,
+          page: Number(page),
+          limit: Number(limit),
+          total_pages: Math.ceil(total / limit),
+        },
+      };
+    }
+
+    return {
+      success: 0,
+      error: result?.error,
+    };
+  }
+  //
 }

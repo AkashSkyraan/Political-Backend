@@ -2352,8 +2352,9 @@ export const getMeetingsAppoints = async (req, res) => {
       to_date: to_date === "" ? null : to_date,
       page,
     });
-    // console.log(result);
     const finalResponse = replaceNullWithEmptyString(result?.data);
+    const pagination = result?.pagination;
+    // console.log(finalResponse);
 
     if (result?.success === 1) {
       return sendResponse(
@@ -2361,7 +2362,7 @@ export const getMeetingsAppoints = async (req, res) => {
         200,
         1,
         "Meetings and Appointments fetched successfully",
-        [finalResponse],
+        [{ data: finalResponse, pagination: pagination }],
         "",
       );
     } else if (result?.success === 0) {

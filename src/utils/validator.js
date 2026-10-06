@@ -1251,6 +1251,16 @@ export const getTravelPhotosSchema = Joi.object({
     "any.required": "Travel Id cannot be empty",
   }),
 });
+export const updateTravelDocsSchema = Joi.object({
+  travel_id: Joi.number().required().messages({
+    "number.base": "Id should be an integer",
+    "any.required": "Id cannot be empty",
+  }),
+  media_id: Joi.string().required().messages({
+    "string.base": "Media Id should be a string",
+    "any.required": "Media Id cannot be empty",
+  }),
+});
 export const getCountriesSchema = Joi.object({
   country: Joi.string().allow("").messages({
     "string.base": "country should be an string",

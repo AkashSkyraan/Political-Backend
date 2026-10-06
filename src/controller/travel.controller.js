@@ -19,6 +19,7 @@ import {
   updatedailyplanSchema,
   updateExpenseSchema,
   updateNotesSchema,
+  updateTravelDocsSchema,
   updateTravelPhotosSchema,
   updateTravelSchema,
   validateRequest,
@@ -1161,7 +1162,7 @@ export const addExpense = async (req, res) => {
     //   data.finance_id = financeResult.id;
     // }
 
-    // 
+    //
     if (result?.success === 1) {
       return sendResponse(
         res,
@@ -2158,7 +2159,7 @@ export const addTravelDocs = async (req, res) => {
 
 export const updateTravelDocs = async (req, res) => {
   try {
-    const validatedData = validateRequest(req.body, updateTravelPhotosSchema);
+    const validatedData = validateRequest(req.body, updateTravelDocsSchema);
 
     if (validatedData?.success === 0) {
       return sendResponse(
@@ -2192,27 +2193,27 @@ export const updateTravelDocs = async (req, res) => {
 
     fetch_media_id.push(...media_id);
     fetch_media_id = fetch_media_id.join(",");
-    console.log(fetch_media_id);
+    // console.log(fetch_media_id);
 
     const result = await travelMdl.updateTravelDocs({
       travel_id,
-      fetch_media_id,
+      media_id: fetch_media_id,
     });
+    // console.log(result);
+    // const data = {
+    //   id: id,
+    //   travel_id: travel_id,
+    //   media_id: media_id === null ? [] : media_id,
+    //   created_at: today,
+    // };
 
-    const data = {
-      id: id,
-      travel_id: travel_id,
-      media_id: media_id === null ? [] : media_id,
-      created_at: today,
-    };
+    // if (media_id != null) {
+    //   const id = media_id.split(",");
+    //   const result = sourceMdl.getMedia(id);
+    //   data.media_id = result?.data;
+    // }
 
-    if (media_id != null) {
-      const id = media_id.split(",");
-      const result = sourceMdl.getMedia(id);
-      data.media_id = result?.data;
-    }
-
-    const response = replaceNullWithEmptyString(data);
+    // const response = replaceNullWithEmptyString(data);
 
     if (result?.success === 1) {
       return sendResponse(

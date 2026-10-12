@@ -24,7 +24,6 @@ const pool = mysql.createPool({
 //   queueLimit: Number(process.env.DB_QUEUE_LIMIT) || 0,
 //   timezone: "Z",
 // });
-//
 
 // const pool = mysql.createPool({
 //   host: "localhost",

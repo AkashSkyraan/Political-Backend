@@ -1093,12 +1093,12 @@ export const updateMeeting = async (req, res) => {
       params.push(descp);
     }
 
-    if (m_type) {
+    if (m_type !== undefined) {
       update_columns.push("m_type = ?");
       params.push(m_type);
     }
 
-    if (m_priority) {
+    if (m_priority !== undefined) {
       update_columns.push("m_priority = ?");
       params.push(m_priority);
     }
@@ -1233,7 +1233,7 @@ export const updateMeeting = async (req, res) => {
     params.push(id);
     // console.log(update_columns);
     let meeting_from_info = await meetingMdl.getMeetingInfo(id);
-    let meeting_from_date = meeting_from_info?.data[0]?.from_date;
+    let meeting_from_date = String(meeting_from_info?.data[0]?.from_date);
     let user_id = meeting_from_info?.data[0]?.user_id;
     let today = new Date();
     today = formatDateForSQL(today);
@@ -1291,7 +1291,7 @@ export const updateMeeting = async (req, res) => {
     };
 
     const response = replaceNullWithEmptyString(data);
-
+    console.log(meeting_from_date);
     // iff 24 = 24 ---> delete old notify + in progress + notification trigger
     //if 25 > 24 --> delete old one + status upcoming
     // console.log(meeting_from_date, today);

@@ -195,7 +195,7 @@ export const requestOtp = async (req, res) => {
       }
     }
   } catch (error) {
-    console.log("Abc", error.message);
+    console.log("Abc", error);
     return sendResponse(
       res,
       500,

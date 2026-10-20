@@ -36,6 +36,7 @@ export const requestOtpSchema = Joi.object({
   phn_num: Joi.string()
     .min(10)
     .max(15)
+    .allow("", null)
     .pattern(/^(\+91[6-9]\d{9}|[6-9]\d{9})$/)
     .messages({
       "any.required": "Mobile number is required",
@@ -51,7 +52,8 @@ export const requestOtpSchema = Joi.object({
   }),
   c_code: Joi.string()
     .pattern(/^\+\d{2,3}$/)
-    .optional(),
+    .optional()
+    .allow(null, ""),
 });
 
 export const verifyOtpSchema = Joi.object({

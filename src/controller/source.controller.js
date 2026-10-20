@@ -209,6 +209,7 @@ export const getFinCategory = async (req, res) => {
 export const getDeleteReasons = async (req, res) => {
   try {
     const result = await sourceMdl.getDeleteReasons();
+    console.log(result)
 
     const data = [
       ...result,

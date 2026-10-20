@@ -347,8 +347,8 @@ export class sourceModel {
     ORDER BY id ASC
   `;
 
-    const [result] = await executeQuery(query);
-
+    const result = await executeQuery(query);
+    
     return result.data;
   }
 }

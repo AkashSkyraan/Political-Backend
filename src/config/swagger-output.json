@@ -243,15 +243,6 @@
         ],
         "summary": "Upload media",
         "description": "Upload images, videos or documents",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "Media uploaded successfully"
@@ -297,15 +288,6 @@
         ],
         "summary": "Upload Documents",
         "description": "Upload documents only",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "Documents uploaded successfully"
@@ -346,15 +328,6 @@
         ],
         "summary": "Upload Images ",
         "description": "Upload Images Only",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "Images uploaded successfully"
@@ -395,15 +368,6 @@
         ],
         "summary": "Upload Videos ",
         "description": "Upload Videos Only",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "Videos uploaded successfully"
@@ -440,15 +404,6 @@
     "/source/addrole": {
       "post": {
         "description": "",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "responses": {
           "default": {
             "description": ""
@@ -473,15 +428,6 @@
     "/source/updaterole": {
       "post": {
         "description": "",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "responses": {
           "default": {
             "description": ""
@@ -516,15 +462,6 @@
         ],
         "summary": "Get member role dropdown list",
         "description": "Get member role dropdown list",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "dropdown list fetched successfully"
@@ -542,15 +479,6 @@
         ],
         "summary": "Add or Update Finance Category",
         "description": "",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "Finance Catgory saved successfully"
@@ -600,15 +528,6 @@
         ],
         "summary": "Get Finance Category",
         "description": "",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "Finance Catgory Fetched successfully"
@@ -650,15 +569,6 @@
         ],
         "summary": "Get Delete Reasons",
         "description": "Fetch all active delete reasons.",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "Delete reasons fetched successfully"

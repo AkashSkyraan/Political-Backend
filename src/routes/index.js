@@ -22,7 +22,7 @@ import { verifyAdminToken } from "../middleware/adminAuth.middleware.js";
 
 export const router = express.Router();
 router.use("/auth", authRoutes);
-router.use("/source", verifyToken, sourceRoutes);
+router.use("/source",  sourceRoutes);
 router.use("/meeting", verifyToken, meetingRoutes);
 
 router.use("/support", verifyToken, supportRoutes);

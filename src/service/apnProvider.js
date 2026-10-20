@@ -17,7 +17,7 @@ export const apnProvider = new apn.Provider({
     teamId: "38BKAW23ZM",
   },
   // production: process.env.NODE_ENV === "production" ? true : false,
-  production: "true",
+  production: true,
 });
 
 

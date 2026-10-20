@@ -16,7 +16,7 @@ const sourceMdl = new sourceModel();
 export const uploadMedia = async (req, res) => {
   try {
     const validatedData = validateRequest(req.body, addMediaSchema);
- 
+
     if (validatedData?.success === 0) {
       return sendResponse(
         res,
@@ -27,11 +27,11 @@ export const uploadMedia = async (req, res) => {
         validatedData?.errorObject?.errors,
       );
     }
- 
+
     let { org_name } = validatedData?.value;
     const files = req.files;
     // console.log(files);
- 
+
     if (!files || files.length < 1) {
       return sendResponse(res, 200, 0, "No files uploaded", [], "");
     }
@@ -61,7 +61,7 @@ export const uploadMedia = async (req, res) => {
           type: file_type[1],
           org_name: org_name[index],
         });
- 
+
         let today = new Date();
         today = formatDateForSQL(today);
         return {
@@ -73,7 +73,7 @@ export const uploadMedia = async (req, res) => {
         };
       }),
     );
- 
+
     return sendResponse(
       res,
       200,
@@ -86,7 +86,6 @@ export const uploadMedia = async (req, res) => {
     return sendResponse(res, 500, "Internal Server error", [], error.message);
   }
 };
- 
 
 export const addUserrole = async (req, res) => {
   try {
@@ -240,5 +239,4 @@ export const getDeleteReasons = async (req, res) => {
   }
 };
 
-
-// 
+//

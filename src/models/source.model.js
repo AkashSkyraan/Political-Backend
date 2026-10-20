@@ -222,9 +222,7 @@ export class sourceModel {
     const baseUrl = process.env.MEDIA_BASE_URL;
 
     rows.forEach((row) => {
-      row.cat_img = row.cat_img
-        ? `${baseUrl}/${row.cat_img}`
-        : "";
+      row.cat_img = row.cat_img ? `${baseUrl}/${row.cat_img}` : "";
     });
 
     if (!id) {
@@ -349,7 +347,7 @@ export class sourceModel {
     ORDER BY id ASC
   `;
 
-    const result = await executeQuery(query);
+    const [result] = await executeQuery(query);
 
     return result.data;
   }

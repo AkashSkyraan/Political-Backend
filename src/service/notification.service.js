@@ -6,21 +6,21 @@ import { apnProvider } from "./apnProvider.js";
 import { executeQuery } from "../utils/helper.js";
 import apn from "apn";
 
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-// const serviceAccountPath = path.join(
-//   __dirname,
-//   "./political-app-70f93-bac165acf56c.json",
-// );
+const serviceAccountPath = path.join(
+  __dirname,
+  "./political-app-70f93-bac165acf56c.json",
+);
 
-// if (!admin.apps.length) {
-//   admin.initializeApp({
-//     credential: admin.credential.cert(
-//       JSON.parse(fs.readFileSync(serviceAccountPath, "utf8")),
-//     ),
-//   });
-// }
+if (!admin.apps.length) {
+  admin.initializeApp({
+    credential: admin.credential.cert(
+      JSON.parse(fs.readFileSync(serviceAccountPath, "utf8")),
+    ),
+  });
+}
 
 export const sendPushNotification = async ({ user_id, payload }) => {
   // console.log(user_id, payload);

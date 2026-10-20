@@ -25,6 +25,9 @@ export const requestOtp = async (req, res) => {
   try {
     const validatedData = validateRequest(req.body, requestOtpSchema);
 
+
+  
+
     if (validatedData?.success === 0) {
       return sendResponse(
         res,

@@ -102,10 +102,21 @@ export const sendAPNSNotification = async ({ tokens, title, body }) => {
 
     const result = await apnProvider.send(notification, tokens);
 
+    // result.failed.forEach((f) => {
+    //   console.error(" Token:", f.device);
+    //   console.error(" Error:", f.response?.reason || f.error);
+    // });
+
+
     result.failed.forEach((f) => {
-      console.error(" Token:", f.device);
-      console.error(" Error:", f.response?.reason || f.error);
-    });
+  console.error("APNS failure:", {
+    device: f.device ? `${f.device.slice(0, 8)}...` : undefined,
+    status: f.status,
+    response: f.response,
+    error: f.error?.message,
+    cause: f.error?.cause?.message,
+  });
+});
 
     return result;
   } catch (err) {
